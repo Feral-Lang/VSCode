@@ -1,3 +1,3 @@
 # Feral Language Syntax Highlighting Extension for VS Code
 
-Installation can be done by cloning this repository and copying the directory to `$HOME/.vscode/extensions/`.
+Can be installed from the [VS Code Marketplace item](https://marketplace.visualstudio.com/items?itemName=electrux.feral).

@@ -2,11 +2,11 @@
     "name": "feral",
     "displayName": "Feral",
     "description": "Language syntax support for Feral",
-    "version": "0.2.1",
-    "publisher": "electrux",
+    "version": "0.3.3",
+    "publisher": "Electrux",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Feral-Lang/Feral-VSCode.git"
+        "url": "https://github.com/Feral-Lang/VSCode.git"
     },
     "engines": {
         "vscode": "^1.76.0"

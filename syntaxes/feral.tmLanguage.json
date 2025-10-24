@@ -40,16 +40,20 @@
 		"keywords": {
 			"patterns": [
 				{
-					"name": "keyword",
-					"match": "\\b(let|struct|fn|return|inline|if|elif|else|for|in|while|continue|break|or|defer)\\b"
+					"name": "keyword.function",
+					"match": "\\b(fn)\\b"
+				},
+				{
+					"name": "keyword.control",
+					"match": "\\b(return|if|elif|else|for|in|while|continue|break|or|defer)\\b"
+				},
+				{
+					"name": "storage.modifier",
+					"match": "\\b(let|inline)\\b"
 				},
 				{
 					"name": "constant.language",
-					"match": "\\b(true|false|nil)\\b"
-				},
-				{
-					"name": "constant.language",
-					"match": "\\b(self)\\b"
+					"match": "\\b(true|false|nil|self)\\b"
 				}
 			]
 		},
@@ -104,7 +108,7 @@
 					"match": "[\\s\\.]*\\b((?!fn)[_\\w]+)\\b[\\s]*\\(",
 					"captures": {
 						"1": {
-							"name": "support.function"
+							"name": "entity.name.function"
 						}
 					}
 				}
@@ -113,10 +117,10 @@
 		"fields": {
 			"patterns": [
 				{
-					"match": "(\\b[_\\w]+\\b)\\.",
+					"match": "\\.(\\b[_\\w]+\\b)(?!\\()",
 					"captures": {
 						"1": {
-							"name": "support.class"
+							"name": "variable.other.property"
 						}
 					}
 				}
