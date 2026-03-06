@@ -105,7 +105,7 @@
 		"functions": {
 			"patterns": [
 				{
-					"match": "[\\s\\.]*\\b((?!fn)[_\\w]+)\\b[\\s]*\\(",
+					"match": "[\\s\\.]*\\b((?!fn|async|return|yield|await|if|elif|for|while|defer)[_\\w]+)\\b[\\s]*\\(",
 					"captures": {
 						"1": {
 							"name": "entity.name.function"
