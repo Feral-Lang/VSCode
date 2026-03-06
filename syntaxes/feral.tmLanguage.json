@@ -41,11 +41,11 @@
 			"patterns": [
 				{
 					"name": "keyword.function",
-					"match": "\\b(fn)\\b"
+					"match": "\\b(fn|async)\\b"
 				},
 				{
 					"name": "keyword.control",
-					"match": "\\b(return|if|elif|else|for|in|while|continue|break|or|defer)\\b"
+					"match": "\\b(return|yield|await|if|elif|else|for|in|while|continue|break|or|defer)\\b"
 				},
 				{
 					"name": "storage.modifier",
