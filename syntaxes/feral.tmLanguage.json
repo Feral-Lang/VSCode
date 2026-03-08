@@ -41,11 +41,15 @@
 			"patterns": [
 				{
 					"name": "keyword.function",
-					"match": "\\b(fn|async)\\b"
+					"match": "\\b(fn)\\b"
 				},
 				{
 					"name": "keyword.control",
-					"match": "\\b(return|yield|await|if|elif|else|for|in|while|continue|break|or|defer)\\b"
+					"match": "\\b(return|yield|await|wait|if|elif|else|for|in|while|continue|break|or|defer)\\b"
+				},
+				{
+					"name": "entity.name.tag",
+					"match": "\\b(closure|ref|unref|const|deconst|raise|enum|struct|irange)\\b"
 				},
 				{
 					"name": "storage.modifier",
@@ -105,7 +109,7 @@
 		"functions": {
 			"patterns": [
 				{
-					"match": "[\\s\\.]*\\b((?!fn|async|return|yield|await|if|elif|for|while|defer)[_\\w]+)\\b[\\s]*\\(",
+					"match": "[\\s\\.]*\\b((?!fn|return|yield|await|wait|if|elif|for|while|defer)[_\\w]+)\\b[\\s]*\\(",
 					"captures": {
 						"1": {
 							"name": "entity.name.function"
