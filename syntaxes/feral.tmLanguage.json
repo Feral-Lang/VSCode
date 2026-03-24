@@ -1,441 +1,172 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Feral",
-	"scopeName": "source.feral",
-	"fileTypes": [
-		"fer",
-		"fecl"
-	],
 	"patterns": [
 		{
-			"include": "#block-comment"
+			"include": "#keywords"
 		},
 		{
-			"include": "#line-comment"
+			"include": "#strings"
 		},
 		{
-			"include": "#string-double"
+			"include": "#strings_single"
 		},
 		{
-			"include": "#string-single"
+			"include": "#strings_back"
 		},
 		{
-			"include": "#string-backtick"
+			"include": "#numerics"
 		},
 		{
-			"include": "#special-identifiers"
+			"include": "#functions"
 		},
 		{
-			"include": "#number-hex"
+			"include": "#fields"
 		},
 		{
-			"include": "#number-binary"
+			"include": "#atoms"
 		},
 		{
-			"include": "#number-octal"
+			"include": "#struct_types"
 		},
 		{
-			"include": "#number-float"
+			"include": "#line_comment"
 		},
 		{
-			"include": "#number-decimal"
-		},
-		{
-			"include": "#language-constants"
-		},
-		{
-			"include": "#keywords-control"
-		},
-		{
-			"include": "#keywords-declaration"
-		},
-		{
-			"include": "#keywords-error"
-		},
-		{
-			"include": "#keywords-async"
-		},
-		{
-			"include": "#fn-definition"
-		},
-		{
-			"include": "#fn-call"
-		},
-		{
-			"include": "#var-decl-name"
-		},
-		{
-			"include": "#atom"
-		},
-		{
-			"include": "#operators"
-		},
-		{
-			"include": "#punctuation"
+			"include": "#block_comment"
 		}
 	],
 	"repository": {
-		"block-comment": {
-			"name": "comment.block.feral",
-			"begin": "/\\*",
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.definition.comment.begin.feral"
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.function",
+					"match": "\\b(fn)\\b"
+				},
+				{
+					"name": "keyword.control",
+					"match": "\\b(return|yield|await|wait|if|elif|else|for|in|while|continue|break|or|defer)\\b"
+				},
+				{
+					"name": "entity.name.tag",
+					"match": "\\b(closure|ref|unref|const|deconst|raise|enum|struct|irange)\\b"
+				},
+				{
+					"name": "storage.modifier",
+					"match": "\\b(let|inline)\\b"
+				},
+				{
+					"name": "constant.language",
+					"match": "\\b(true|false|nil|self)\\b"
 				}
-			},
-			"end": "\\*/",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.definition.comment.end.feral"
-				}
-			}
+			]
 		},
-		"line-comment": {
-			"name": "comment.line.number-sign.feral",
-			"match": "(#).*$",
-			"captures": {
-				"1": {
-					"name": "punctuation.definition.comment.feral"
-				}
-			}
-		},
-		"string-double": {
+		"strings": {
 			"name": "string.quoted.double.feral",
 			"begin": "\"",
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.begin.feral"
-				}
-			},
 			"end": "\"",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.end.feral"
-				}
-			},
 			"patterns": [
 				{
-					"include": "#escape-sequence"
+					"name": "constant.character.escape.feral",
+					"match": "\\\\."
 				}
 			]
 		},
-		"string-single": {
+		"strings_single": {
 			"name": "string.quoted.single.feral",
 			"begin": "'",
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.begin.feral"
-				}
-			},
 			"end": "'",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.end.feral"
-				}
-			},
 			"patterns": [
 				{
-					"include": "#escape-sequence"
+					"name": "constant.character.escape.feral",
+					"match": "\\\\."
 				}
 			]
 		},
-		"string-backtick": {
-			"name": "string.quoted.other.feral",
+		"strings_back": {
+			"name": "string.quoted.single.feral",
 			"begin": "`",
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.begin.feral"
-				}
-			},
 			"end": "`",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.end.feral"
-				}
-			},
 			"patterns": [
 				{
-					"include": "#escape-sequence"
+					"name": "constant.character.escape.feral",
+					"match": "\\\\."
 				}
 			]
 		},
-		"escape-sequence": {
-			"name": "constant.character.escape.feral",
-			"match": "\\\\."
-		},
-		"special-identifiers": {
-			"comment": "__SRC_PATH__ and __SRC_DIR__ are expanded to string literals at lex time",
-			"name": "support.constant.feral",
-			"match": "\\b(__SRC_PATH__|__SRC_DIR__)\\b"
-		},
-		"number-hex": {
-			"name": "constant.numeric.integer.hexadecimal.feral",
-			"match": "\\b(0[xX][0-9a-fA-F]+)\\b"
-		},
-		"number-binary": {
-			"name": "constant.numeric.integer.binary.feral",
-			"match": "\\b(0[bB][01]+)\\b"
-		},
-		"number-octal": {
-			"name": "constant.numeric.integer.octal.feral",
-			"match": "\\b(0[0-7]+)\\b"
-		},
-		"number-float": {
-			"comment": "Must be matched before decimal integer to capture the dot",
-			"name": "constant.numeric.float.feral",
-			"match": "\\b([0-9]+\\.[0-9]+)\\b"
-		},
-		"number-decimal": {
-			"name": "constant.numeric.integer.decimal.feral",
-			"match": "\\b([0-9]+)\\b"
-		},
-		"language-constants": {
-			"name": "constant.language.feral",
-			"match": "\\b(true|false|nil)\\b"
-		},
-		"keywords-control": {
-			"comment": "Control-flow keywords",
-			"name": "keyword.control.feral",
-			"match": "\\b(if|elif|else|for|in|while|return|continue|break|defer|inline)\\b"
-		},
-		"keywords-declaration": {
-			"comment": "'let' is matched here; 'fn' is handled by fn-definition for richer context",
-			"name": "keyword.declaration.feral",
-			"match": "\\b(let)\\b"
-		},
-		"keywords-error": {
-			"comment": "'or' introduces the error-handling block: expr or errVar { ... }",
-			"name": "keyword.operator.error-handler.feral",
-			"match": "\\b(or)\\b"
-		},
-		"keywords-async": {
-			"name": "keyword.control.async.feral",
-			"match": "\\b(await|wait|yield)\\b"
-		},
-		"fn-definition": {
-			"comment": "fn keyword followed by its parameter list",
-			"name": "meta.function.feral",
-			"begin": "\\b(fn)\\s*(\\()",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.declaration.function.feral"
-				},
-				"2": {
-					"name": "punctuation.definition.parameters.begin.feral"
-				}
-			},
-			"end": "\\)",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.definition.parameters.end.feral"
-				}
-			},
+		"numerics": {
 			"patterns": [
 				{
-					"include": "#block-comment"
-				},
-				{
-					"include": "#line-comment"
-				},
-				{
-					"include": "#string-double"
-				},
-				{
-					"include": "#string-single"
-				},
-				{
-					"include": "#string-backtick"
-				},
-				{
-					"include": "#language-constants"
-				},
-				{
-					"include": "#atom"
-				},
-				{
-					"comment": "Variadic parameter:  name...",
-					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(\\.\\.\\.)",
+					"match": "\\b([0-9]+[\\.]*[0-9]*)\\b",
 					"captures": {
 						"1": {
-							"name": "variable.parameter.feral"
-						},
-						"2": {
-							"name": "keyword.operator.variadic.feral"
+							"name": "constant.numeric"
 						}
 					}
-				},
+				}
+			]
+		},
+		"functions": {
+			"patterns": [
 				{
-					"comment": "Parameter name (with or without a default value)",
-					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+					"match": "[\\s\\.]*\\b((?!fn|return|yield|await|wait|if|elif|for|while|defer)[_\\w]+)\\b[\\s]*\\(",
 					"captures": {
 						"1": {
-							"name": "variable.parameter.feral"
+							"name": "entity.name.function"
 						}
 					}
-				},
-				{
-					"name": "keyword.operator.assignment.feral",
-					"match": "="
-				},
-				{
-					"include": "#number-hex"
-				},
-				{
-					"include": "#number-binary"
-				},
-				{
-					"include": "#number-octal"
-				},
-				{
-					"include": "#number-float"
-				},
-				{
-					"include": "#number-decimal"
-				},
-				{
-					"name": "punctuation.separator.parameter.feral",
-					"match": ","
 				}
 			]
 		},
-		"fn-call": {
-			"comment": "Identifier immediately before '(' that is not a keyword",
-			"name": "meta.function-call.feral",
-			"match": "\\b(?!(if|elif|else|for|in|while|return|continue|break|defer|fn|let|yield|await|wait|or|inline|true|false|nil)\\b)([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\()",
-			"captures": {
-				"2": {
-					"name": "entity.name.function.feral"
-				}
-			}
-		},
-		"var-decl-name": {
-			"comment": "Highlight the variable name(s) in a let binding",
-			"match": "(?<=\\blet\\s{0,64})([a-zA-Z_][a-zA-Z0-9_]*)(?=\\s*(?:in\\s+\\S|=))",
-			"captures": {
-				"1": {
-					"name": "variable.other.readwrite.feral"
-				}
-			}
-		},
-		"atom": {
-			"comment": "Dot-prefixed symbol: .name — only when not preceded by alnum/_/)]/'\"]",
-			"name": "constant.other.symbol.feral",
-			"match": "(?<![a-zA-Z0-9_)\\]'\"])(\\.(?:[a-zA-Z_][a-zA-Z0-9_]*))"
-		},
-		"operators": {
+		"fields": {
 			"patterns": [
 				{
-					"comment": "Nil-coalesce: ??  — before lone ?",
-					"name": "keyword.operator.nil-coalesce.feral",
-					"match": "\\?\\?"
-				},
-				{
-					"comment": "Power **, root //  — before * and /",
-					"name": "keyword.operator.arithmetic.feral",
-					"match": "\\*\\*|//"
-				},
-				{
-					"comment": "Compound-assignment operators  — before plain = and arithmetic ops",
-					"name": "keyword.operator.assignment.compound.feral",
-					"match": "\\+=|-=|\\*=|/=|%=|<<=|>>=|&=|\\|=|~=|\\^="
-				},
-				{
-					"comment": "Plain assignment  — after compound forms",
-					"name": "keyword.operator.assignment.feral",
-					"match": "(?<![=!<>])=(?!=)"
-				},
-				{
-					"comment": "Equality and inequality  — before < and >",
-					"name": "keyword.operator.comparison.feral",
-					"match": "==|!="
-				},
-				{
-					"comment": "Relational operators  — after shift forms",
-					"name": "keyword.operator.relational.feral",
-					"match": "<=|>=|<(?!<)|>(?!>)"
-				},
-				{
-					"comment": "Bitwise shifts  — before < and >",
-					"name": "keyword.operator.bitwise.shift.feral",
-					"match": "<<=|>>=|<<|>>"
-				},
-				{
-					"comment": "Increment/decrement  — before + and -",
-					"name": "keyword.operator.increment.feral",
-					"match": "\\+\\+|--"
-				},
-				{
-					"comment": "Logical operators",
-					"name": "keyword.operator.logical.feral",
-					"match": "&&|\\|\\||!"
-				},
-				{
-					"comment": "Bitwise operators  — after &&, || to avoid mismatching",
-					"name": "keyword.operator.bitwise.feral",
-					"match": "[&|^~]"
-				},
-				{
-					"comment": "Arithmetic operators",
-					"name": "keyword.operator.arithmetic.feral",
-					"match": "[+\\-*/%]"
-				},
-				{
-					"comment": "Variadic unpack: ...  — before member-access .",
-					"name": "keyword.operator.variadic.feral",
-					"match": "\\.\\.\\."
-				},
-				{
-					"comment": "Arrow member access  — before - as arithmetic",
-					"name": "keyword.operator.member-access.feral",
-					"match": "->"
-				},
-				{
-					"comment": "Member access dot  — after ... and atom patterns",
-					"name": "keyword.operator.member-access.feral",
-					"match": "(?<=[a-zA-Z0-9_)\\]'\"])\\.(?=[a-zA-Z_])"
-				},
-				{
-					"comment": "Ternary ? and :",
-					"name": "keyword.operator.ternary.feral",
-					"match": "[?:]"
+					"match": "\\.(\\b[_\\w]+\\b)(?!\\()",
+					"captures": {
+						"1": {
+							"name": "variable.other.property"
+						}
+					}
 				}
 			]
 		},
-		"punctuation": {
+		"atoms": {
 			"patterns": [
 				{
-					"name": "punctuation.section.block.begin.feral",
-					"match": "\\{"
-				},
+					"match": "(?:^|[\\s\\(]+)(\\.[a-zA-Z0-9_]+)",
+					"captures": {
+						"1": {
+							"name": "constant.language"
+						}
+					}
+				}
+			]
+		},
+		"struct_types": {
+			"patterns": [
 				{
-					"name": "punctuation.section.block.end.feral",
-					"match": "\\}"
-				},
+					"name": "support.class",
+					"match": "\\b[a-zA-Z0-9_]+Ty\\b"
+				}
+			]
+		},
+		"line_comment": {
+			"comment": "Single-line comment",
+			"name": "comment.line",
+			"begin": "#",
+			"end": "$"
+		},
+		"block_comment": {
+			"comment": "Block comment",
+			"name": "comment.block",
+			"begin": "/\\*",
+			"end": "\\*/",
+			"patterns": [
 				{
-					"name": "punctuation.definition.arguments.begin.feral",
-					"match": "\\("
-				},
-				{
-					"name": "punctuation.definition.arguments.end.feral",
-					"match": "\\)"
-				},
-				{
-					"name": "punctuation.definition.index.begin.feral",
-					"match": "\\["
-				},
-				{
-					"name": "punctuation.definition.index.end.feral",
-					"match": "\\]"
-				},
-				{
-					"name": "punctuation.terminator.statement.feral",
-					"match": ";"
-				},
-				{
-					"name": "punctuation.separator.comma.feral",
-					"match": ","
+					"include": "#block_comment"
 				}
 			]
 		}
-	}
+	},
+	"scopeName": "source.fer"
 }
