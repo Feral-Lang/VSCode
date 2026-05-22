@@ -2,7 +2,7 @@
     "name": "feral",
     "displayName": "Feral",
     "description": "Language syntax support for Feral",
-    "version": "0.4.1",
+    "version": "0.5.0",
     "publisher": "Electrux",
     "repository": {
         "type": "git",
