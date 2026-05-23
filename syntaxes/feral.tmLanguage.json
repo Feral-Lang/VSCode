@@ -49,11 +49,11 @@
 				},
 				{
 					"name": "entity.name.tag",
-					"match": "\\b(closure|const|deconst|raise|enum|struct|irange)\\b"
+					"match": "\\b(closure|ref|const|deconst|raise|enum|struct|irange)\\b"
 				},
 				{
 					"name": "storage.modifier",
-					"match": "\\b(let|ref|inline)\\b"
+					"match": "\\b(let|inline)\\b"
 				},
 				{
 					"name": "constant.language",
